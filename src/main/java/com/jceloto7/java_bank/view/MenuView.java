@@ -24,6 +24,7 @@ public class MenuView {
         option = input.toCharArray();
         switch (option[0]) {
             case '1' -> System.out.println("test1");
+
             case '2' -> System.out.println("test2");
             case '3' -> System.out.println("Thanks for using the Java Bank :)");
             default -> System.out.println("Invalid option. Please try again.");

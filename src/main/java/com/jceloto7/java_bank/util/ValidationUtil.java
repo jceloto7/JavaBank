@@ -1,20 +1,47 @@
 package com.jceloto7.java_bank.util;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class ValidationUtil {
-    private final InputUtil inputUtil;
+    private  boolean validation;
+    private  Pattern pattern;
+    private  Matcher matcher;
 
-    public ValidationUtil(InputUtil inputUtil){
-        this.inputUtil = inputUtil;
+
+    public ValidationUtil(boolean validation, Pattern pattern, Matcher matcher){
+        this.validation = validation;
+        this.pattern = pattern;
+        this.matcher = matcher;
     }
-    public char validationSingleOption(String number){
-        char[] singleOption = number.toCharArray();
 
-        while (singleOption.length > 1 || singleOption[0] != '0') {
-            System.out.println("Invalid option. Please try again");
-            number = inputUtil.getInput();
-            singleOption = number.toCharArray();
-        }
-        return singleOption[0];
+    public boolean validationFourNumbers(String input){
+        pattern = Pattern.compile("^[0-9]{4}$");
+        matcher = pattern.matcher(input);
+        validation = matcher.find();
+
+        return  validation;
 
     }
+
+    public boolean validationSixNumbers(String input){
+        pattern = Pattern.compile("^[0-9]{6}$");
+        matcher = pattern.matcher(input);
+        validation = matcher.find();
+
+        return  validation;
+    }
+
+    public boolean validationLetters(String input){
+        pattern = Pattern.compile("^[A-Z][a-z]+$");
+        matcher = pattern.matcher(input);
+        validation = matcher.find();
+
+        return  validation;
+    }
+
+
+
+
+
 }
