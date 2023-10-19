@@ -1,10 +1,10 @@
 package com.jceloto7.java_bank.util;
 
-public class MismatchCorrection {
+public class MismatchCorrectionUtil {
     private  final ValidationUtil validationUtil;
     private final InputUtil inputUtil;
     private String input;
-    public MismatchCorrection(ValidationUtil validationUtil,InputUtil inputUtil,String input){
+    public MismatchCorrectionUtil(ValidationUtil validationUtil, InputUtil inputUtil, String input){
         this.validationUtil = validationUtil;
         this.inputUtil = inputUtil;
         this.input = input;
