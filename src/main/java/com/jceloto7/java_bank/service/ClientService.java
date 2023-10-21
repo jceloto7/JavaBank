@@ -19,15 +19,12 @@ public class ClientService {
     private String toConvert;
 
     public ClientService(InputUtil inputUtil, ValidationUtil validationUtil,
-                         MismatchCorrectionUtil mismatchCorrectionUtil, ConverterUtil converterUtil,
-                         boolean validation, String toConvert){
+                         MismatchCorrectionUtil mismatchCorrectionUtil, ConverterUtil converterUtil){
 
         this.inputUtil = inputUtil;
         this.validationUtil = validationUtil;
         this.mismatchCorrectionUtil = mismatchCorrectionUtil;
         this.converterUtil = converterUtil;
-        this.validation = validation;
-        this.toConvert = toConvert;
 
     }
     public String getClientName(String input){

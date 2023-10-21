@@ -1,5 +1,6 @@
 package com.jceloto7.java_bank.view;
 
+import com.jceloto7.java_bank.Bootstrap;
 import com.jceloto7.java_bank.controller.ClientController;
 import com.jceloto7.java_bank.service.ClientService;
 import com.jceloto7.java_bank.util.InputUtil;
@@ -16,7 +17,9 @@ public class MenuView {
     public void mainMenu(){
         String input;
         char[] option = new char[10];
-        InputUtil inputUtil = new InputUtil();
+        //InputUtil inputUtil = new InputUtil();
+        InputUtil inputUtil = Bootstrap.inputUtil;
+        ClientController clientController = new ClientController(Bootstrap.clientService);
         String clientInput;
         String name;
         int id;

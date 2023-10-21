@@ -4,10 +4,9 @@ public class MismatchCorrectionUtil {
     private  final ValidationUtil validationUtil;
     private final InputUtil inputUtil;
     private String input;
-    public MismatchCorrectionUtil(ValidationUtil validationUtil, InputUtil inputUtil, String input){
+    public MismatchCorrectionUtil(ValidationUtil validationUtil, InputUtil inputUtil){
         this.validationUtil = validationUtil;
         this.inputUtil = inputUtil;
-        this.input = input;
     }
 
     public String retypeLetters(boolean validation){

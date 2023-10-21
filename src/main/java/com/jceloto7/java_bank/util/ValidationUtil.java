@@ -9,10 +9,7 @@ public class ValidationUtil {
     private  Matcher matcher;
 
 
-    public ValidationUtil(boolean validation, Pattern pattern, Matcher matcher){
-        this.validation = validation;
-        this.pattern = pattern;
-        this.matcher = matcher;
+    public ValidationUtil(){
     }
 
     public boolean validationFourNumbers(String input){
