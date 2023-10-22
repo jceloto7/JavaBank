@@ -37,6 +37,15 @@ public class ValidationUtil {
         return  validation;
     }
 
+    public boolean validationLowerCaseLettersAndNumbers(String input){
+        pattern = Pattern.compile("^[a-z 0-9]+$");
+        matcher = pattern.matcher(input);
+        validation = matcher.find();
+
+        return  validation;
+
+    }
+
 
 
 

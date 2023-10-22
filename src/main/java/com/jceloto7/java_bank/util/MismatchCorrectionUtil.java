@@ -30,6 +30,17 @@ public class MismatchCorrectionUtil {
         return input;
     }
 
+    public String retypeLowerCaseLettersAndNumbers(boolean validation){
+        while(!validation){
+            System.out.println("Invalid input. Please just type lower case letters and/or numbers.");
+            input = inputUtil.getInput();
+            validation = validationUtil.validationLowerCaseLettersAndNumbers(input);
+        }
+
+        return input;
+
+    }
+
     public String retypeFourNumbers(boolean validation){
         while(!validation){
             System.out.println("Invalid input. Please just type six integer numbers.");

@@ -9,7 +9,6 @@ import com.jceloto7.java_bank.util.ValidationUtil;
 import java.util.UUID;
 
 public class ClientService {
-    private final InputUtil inputUtil;
     private final ValidationUtil validationUtil;
     private final MismatchCorrectionUtil mismatchCorrectionUtil;
 
@@ -18,10 +17,9 @@ public class ClientService {
 
     private String toConvert;
 
-    public ClientService(InputUtil inputUtil, ValidationUtil validationUtil,
+    public ClientService(ValidationUtil validationUtil,
                          MismatchCorrectionUtil mismatchCorrectionUtil, ConverterUtil converterUtil){
 
-        this.inputUtil = inputUtil;
         this.validationUtil = validationUtil;
         this.mismatchCorrectionUtil = mismatchCorrectionUtil;
         this.converterUtil = converterUtil;
@@ -30,7 +28,6 @@ public class ClientService {
     public String getClientName(String input){
         String name;
 
-        input = inputUtil.getInput();
         validation = validationUtil.validationLetters(input);
         name = mismatchCorrectionUtil.retypeLetters(validation);
 
@@ -40,7 +37,6 @@ public class ClientService {
     public int getClientId(String input){
         int id;
 
-        input = inputUtil.getInput();
         validation = validationUtil.validationSixNumbers(input);
         toConvert = mismatchCorrectionUtil.retypeSixNumbers(validation);
         id = converterUtil.lettersForNumbers(toConvert);
@@ -49,23 +45,32 @@ public class ClientService {
 
     }
 
+    public String getClientUsername(String input){
+        String username;
+
+        validation = validationUtil.validationLowerCaseLettersAndNumbers(input);
+        username = mismatchCorrectionUtil.retypeLowerCaseLettersAndNumbers(validation);
+
+        return username;
+    }
+
     public int getClientPassword(String input){
         int password;
 
-        input = inputUtil.getInput();
-        validation = validationUtil.validationSixNumbers(input);
+        validation = validationUtil.validationFourNumbers(input);
         toConvert = mismatchCorrectionUtil.retypeFourNumbers(validation);
         password = converterUtil.lettersForNumbers(toConvert);
 
         return password;
     }
 
-    public ClientModel getClientData(String name, int id, int password,String input){
-        name = getClientName(input);
-        id = getClientId(input);
-        password = getClientPassword(input);
+    public ClientModel getClientData(String name, int id, String username, int password){
+        name = getClientName(name);
+        id = getClientId(String.valueOf(id));
+        username = getClientUsername(username);
+        password = getClientPassword(String.valueOf(password));
 
-        return new ClientModel(name,id,password);
+        return new ClientModel(name,id,username,password);
 
     }
 }

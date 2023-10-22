@@ -2,28 +2,25 @@ package com.jceloto7.java_bank.view;
 
 import com.jceloto7.java_bank.Bootstrap;
 import com.jceloto7.java_bank.controller.ClientController;
-import com.jceloto7.java_bank.service.ClientService;
+import com.jceloto7.java_bank.model.ClientModel;
 import com.jceloto7.java_bank.util.InputUtil;
-import com.jceloto7.java_bank.util.ValidationUtil;
+import java.util.LinkedList;
+import java.util.List;
 
 public class MenuView {
 
-   // private final ClientController clientController;
-
-    //public MenuView(ClientController clientController){
-      //  this.clientController=clientController;
-    //}
-
     public void mainMenu(){
         String input;
-        char[] option = new char[10];
-        //InputUtil inputUtil = new InputUtil();
+        char[] option = new char[3];
         InputUtil inputUtil = Bootstrap.inputUtil;
         ClientController clientController = new ClientController(Bootstrap.clientService);
+        ClientModel clientModel;
         String clientInput;
         String name;
         int id;
+        String username;
         int password;
+        List<ClientModel> clientModelList = new LinkedList<>();
 
         System.out.println("""
             Welcome to  Java Bank ^-^
@@ -45,7 +42,28 @@ public class MenuView {
                             We are glad for you decision :)
                             First of all we need to know your name.""");
                 clientInput = inputUtil.getInput();
-                name = clientController.getClientName(input);
+                name = clientController.getClientName(clientInput);
+                System.out.println("""
+                        What a pretty name :)
+                        Now, please type your id""");
+                clientInput = inputUtil.getInput();
+                id = clientController.getClientId(clientInput);
+                System.out.println("""
+                        All right! Now, you will need to create your username.
+                        You will use it to enter in your account, so keep in mind.""");
+                clientInput=inputUtil.getInput();
+                username = clientController.getClientUsername(clientInput);
+                System.out.println("""
+                        We are almost finishing.
+                        For the last step, create a password for your account.
+                        You won't want than anyone has access to your data.
+                        Remember: The password must contain just four numbers.""");
+                clientInput = inputUtil.getInput();
+                password = clientController.getClientPassword(clientInput);
+                clientModel = clientController.getClientData(name,id, username,password);
+                clientModelList.add(clientModel);
+
+
             }
 
             case '2' -> System.out.println("test2");

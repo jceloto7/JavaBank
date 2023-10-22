@@ -29,7 +29,7 @@ public class Bootstrap {
         inputUtil = new InputUtil();
         validationUtil = new ValidationUtil();
         mismatchCorrectionUtil = new MismatchCorrectionUtil(validationUtil, inputUtil);
-        clientService = new ClientService(inputUtil,validationUtil,mismatchCorrectionUtil,converterUtil);
+        clientService = new ClientService(validationUtil,mismatchCorrectionUtil,converterUtil);
         validationService = new ValidationService();
     }
 }
