@@ -21,13 +21,13 @@ public class ClientController {
         return "";
     }
 
-    public int getClientId(String input) {
+    public String getClientId(String input) {
         try {
             return clientService.getClientId(input);
         } catch (Exception ex){
             System.out.println("An unexpected error has occurred. Please try again.");
         }
-        return 0;
+        return "";
     }
 
     public String getClientUsername(String input){
@@ -41,16 +41,16 @@ public class ClientController {
 
     }
 
-    public int getClientPassword(String input) {
+    public String getClientPassword(String input) {
         try {
             return clientService.getClientPassword(input);
         } catch (Exception ex) {
             System.out.println("An unexpected error has occurred. Please try again.");
         }
-        return 0;
+        return "";
     }
 
-    public ClientModel getClientData(String name, int id, String username, int password){
+    public ClientModel getClientData(String name, String id, String username, String password){
         try{
             return clientService.getClientData(name,id, username,password);
         }catch (Exception ex){

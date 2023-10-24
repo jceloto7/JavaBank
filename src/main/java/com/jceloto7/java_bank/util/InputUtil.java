@@ -10,7 +10,7 @@ public class InputUtil {
 
     public String getInput() {
         String input;
-        input = scanner.next();
+        input = scanner.nextLine();
         return input;
     }
     public void closeScanner(){

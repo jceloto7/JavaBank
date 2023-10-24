@@ -4,6 +4,7 @@ import com.jceloto7.java_bank.Bootstrap;
 import com.jceloto7.java_bank.controller.ClientController;
 import com.jceloto7.java_bank.model.ClientModel;
 import com.jceloto7.java_bank.util.InputUtil;
+import com.jceloto7.java_bank.model.ClientModelList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,10 +18,15 @@ public class MenuView {
         ClientModel clientModel;
         String clientInput;
         String name;
-        int id;
+        String id;
         String username;
-        int password;
-        List<ClientModel> clientModelList = new LinkedList<>();
+        String password;
+        boolean usernameFound;
+        ClientModelList clientModelList = new ClientModelList();
+        List<ClientModel> clientModelListIterator = clientModelList.getClientModelList();
+        //ClientModelList clientModelList = Bootstrap.clientModelList;
+        //ClientModelList clientModelList;
+        //List<ClientModel> clientModelList = new LinkedList<>();
 
         System.out.println("""
             Welcome to  Java Bank ^-^
@@ -45,7 +51,7 @@ public class MenuView {
                 name = clientController.getClientName(clientInput);
                 System.out.println("""
                         What a pretty name :)
-                        Now, please type your id""");
+                        Now, please type your id (it contains six integer numbers.).""");
                 clientInput = inputUtil.getInput();
                 id = clientController.getClientId(clientInput);
                 System.out.println("""
@@ -61,12 +67,32 @@ public class MenuView {
                 clientInput = inputUtil.getInput();
                 password = clientController.getClientPassword(clientInput);
                 clientModel = clientController.getClientData(name,id, username,password);
-                clientModelList.add(clientModel);
-
-
+                clientModelList.addClient(clientModel);
+                System.out.println("""
+                        All done! Welcome to our family.
+                        We hope you get satisfied with our services.
+                        """);
             }
 
-            case '2' -> System.out.println("test2");
+            case '2' -> {
+                System.out.println("""
+                        Please enter your username:""");
+                username = inputUtil.getInput();
+                usernameFound =false;
+                for(ClientModel clientModelIteration : clientModelListIterator){
+                    if (clientModelIteration.getUsername().equals(username)) {
+                        usernameFound = true;
+                        break;
+                    }
+                }
+                if (usernameFound){
+                    System.out.println("test");
+                }
+                while (!usernameFound){
+                    System.out.println();
+                }
+
+            }
             case '3' -> System.out.println("Thanks for using the Java Bank :)");
             default -> System.out.println("Invalid option. Please try again.");
         }

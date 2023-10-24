@@ -9,18 +9,18 @@ public class MismatchCorrectionUtil {
         this.inputUtil = inputUtil;
     }
 
-    public String retypeLetters(boolean validation){
+    public String retypeLetters(boolean validation, String input){
         while(!validation){
             System.out.println("Invalid input. Please just type letters:");
             input = inputUtil.getInput();
-            validation = validationUtil.validationLetters(input);
+            validation = validationUtil.validationLettersAndSpaces(input);
         }
 
         return input;
 
     }
 
-    public String retypeSixNumbers(boolean validation){
+    public String retypeSixNumbers(boolean validation,String input){
         while(!validation){
             System.out.println("Invalid input. Please just type six integer numbers.");
             input = inputUtil.getInput();
@@ -30,7 +30,7 @@ public class MismatchCorrectionUtil {
         return input;
     }
 
-    public String retypeLowerCaseLettersAndNumbers(boolean validation){
+    public String retypeLowerCaseLettersAndNumbers(boolean validation, String input ){
         while(!validation){
             System.out.println("Invalid input. Please just type lower case letters and/or numbers.");
             input = inputUtil.getInput();
@@ -41,11 +41,11 @@ public class MismatchCorrectionUtil {
 
     }
 
-    public String retypeFourNumbers(boolean validation){
+    public String retypeFourNumbers(boolean validation, String input){
         while(!validation){
-            System.out.println("Invalid input. Please just type six integer numbers.");
+            System.out.println("Invalid input. Please just type four integer numbers.");
             input = inputUtil.getInput();
-            validation = validationUtil.validationSixNumbers(input);
+            validation = validationUtil.validationFourNumbers(input);
         }
 
         return input;

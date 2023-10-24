@@ -2,11 +2,8 @@ package com.jceloto7.java_bank.service;
 
 import com.jceloto7.java_bank.model.ClientModel;
 import com.jceloto7.java_bank.util.ConverterUtil;
-import com.jceloto7.java_bank.util.InputUtil;
 import com.jceloto7.java_bank.util.MismatchCorrectionUtil;
 import com.jceloto7.java_bank.util.ValidationUtil;
-
-import java.util.UUID;
 
 public class ClientService {
     private final ValidationUtil validationUtil;
@@ -28,18 +25,17 @@ public class ClientService {
     public String getClientName(String input){
         String name;
 
-        validation = validationUtil.validationLetters(input);
-        name = mismatchCorrectionUtil.retypeLetters(validation);
+        validation = validationUtil.validationLettersAndSpaces(input);
+        name = mismatchCorrectionUtil.retypeLetters(validation,input);
 
         return name;
     }
 
-    public int getClientId(String input){
-        int id;
+    public String getClientId(String input){
+        String id;
 
         validation = validationUtil.validationSixNumbers(input);
-        toConvert = mismatchCorrectionUtil.retypeSixNumbers(validation);
-        id = converterUtil.lettersForNumbers(toConvert);
+        id = mismatchCorrectionUtil.retypeSixNumbers(validation,input);
 
         return id;
 
@@ -49,22 +45,21 @@ public class ClientService {
         String username;
 
         validation = validationUtil.validationLowerCaseLettersAndNumbers(input);
-        username = mismatchCorrectionUtil.retypeLowerCaseLettersAndNumbers(validation);
+        username = mismatchCorrectionUtil.retypeLowerCaseLettersAndNumbers(validation,input);
 
         return username;
     }
 
-    public int getClientPassword(String input){
-        int password;
+    public String getClientPassword(String input){
+        String password;
 
         validation = validationUtil.validationFourNumbers(input);
-        toConvert = mismatchCorrectionUtil.retypeFourNumbers(validation);
-        password = converterUtil.lettersForNumbers(toConvert);
+        password = mismatchCorrectionUtil.retypeFourNumbers(validation,input);
 
         return password;
     }
 
-    public ClientModel getClientData(String name, int id, String username, int password){
+    public ClientModel getClientData(String name, String id, String username, String password){
         name = getClientName(name);
         id = getClientId(String.valueOf(id));
         username = getClientUsername(username);

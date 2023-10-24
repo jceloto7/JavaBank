@@ -2,37 +2,22 @@ package com.jceloto7.java_bank.model;
 
 public class ClientModel {
     private String name;
-    private int id;
+    private String id;
     private String username;
-    private int password;
+    private String password;
 
 
     public ClientModel(){
-        this("", 0, "", 0);
+        this("", "", "", "");
     }
 
-    public ClientModel(String name, int id, String username, int password) {
+    public ClientModel(String name, String id, String username, String password) {
         this.name = name;
         this.id = id;
         this.username = username;
         this.password = password;
     }
 
-    public int getPassword() {
-        return password;
-    }
-
-    public void setPassword(int password) {
-        this.password = password;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -42,11 +27,28 @@ public class ClientModel {
         this.name = name;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getUsername() {
         return username;
     }
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

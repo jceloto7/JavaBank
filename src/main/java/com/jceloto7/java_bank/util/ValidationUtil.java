@@ -29,8 +29,8 @@ public class ValidationUtil {
         return  validation;
     }
 
-    public boolean validationLetters(String input){
-        pattern = Pattern.compile("^[A-Z][a-z]+$");
+    public boolean validationLettersAndSpaces(String input){
+        pattern = Pattern.compile("^[a-zA-Z\\s]+$");
         matcher = pattern.matcher(input);
         validation = matcher.find();
 
