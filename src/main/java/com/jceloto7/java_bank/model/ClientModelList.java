@@ -4,7 +4,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class ClientModelList {
-    private final List<ClientModel>clientModelList = new LinkedList<>();
+    private final  List<ClientModel>clientModelList = new LinkedList<>();
+
+    //public ClientModelList(List<ClientModel> clientModelList){
+        //this.clientModelList = clientModelList;
+    //}
 
     public void addClient(ClientModel clientModel){
         clientModelList.add(clientModel);

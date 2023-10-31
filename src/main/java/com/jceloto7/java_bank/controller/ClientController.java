@@ -50,9 +50,18 @@ public class ClientController {
         return "";
     }
 
-    public ClientModel getClientData(String name, String id, String username, String password){
+    public ClientModel createClientModel(String name, String credentialNumbers, String username, String password){
         try{
-            return clientService.getClientData(name,id, username,password);
+            return clientService.createClientModel(name,credentialNumbers, username,password);
+        }catch (Exception ex){
+            System.out.println("An unexpected error has occurred. Please try again.");
+        }
+        return new ClientModel();
+    }
+
+    public ClientModel findClientModelByUsername(String username){
+        try {
+            return clientService.findClientModelByUsername(username);
         }catch (Exception ex){
             System.out.println("An unexpected error has occurred. Please try again.");
         }

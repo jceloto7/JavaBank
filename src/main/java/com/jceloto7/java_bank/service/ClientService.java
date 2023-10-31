@@ -1,25 +1,23 @@
 package com.jceloto7.java_bank.service;
 
+import com.jceloto7.java_bank.Bootstrap;
 import com.jceloto7.java_bank.model.ClientModel;
-import com.jceloto7.java_bank.util.ConverterUtil;
 import com.jceloto7.java_bank.util.MismatchCorrectionUtil;
 import com.jceloto7.java_bank.util.ValidationUtil;
+
+import java.util.List;
 
 public class ClientService {
     private final ValidationUtil validationUtil;
     private final MismatchCorrectionUtil mismatchCorrectionUtil;
-
-    private final ConverterUtil converterUtil;
     private boolean validation;
 
-    private String toConvert;
 
     public ClientService(ValidationUtil validationUtil,
-                         MismatchCorrectionUtil mismatchCorrectionUtil, ConverterUtil converterUtil){
+                         MismatchCorrectionUtil mismatchCorrectionUtil){
 
         this.validationUtil = validationUtil;
         this.mismatchCorrectionUtil = mismatchCorrectionUtil;
-        this.converterUtil = converterUtil;
 
     }
     public String getClientName(String input){
@@ -59,13 +57,27 @@ public class ClientService {
         return password;
     }
 
-    public ClientModel getClientData(String name, String id, String username, String password){
+    public ClientModel createClientModel(String name, String credentialNumbers, String username, String password){
         name = getClientName(name);
-        id = getClientId(String.valueOf(id));
+        credentialNumbers = getClientId(String.valueOf(credentialNumbers));
         username = getClientUsername(username);
         password = getClientPassword(String.valueOf(password));
 
-        return new ClientModel(name,id,username,password);
+        return new ClientModel(name,credentialNumbers,username,password);
 
     }
+
+    public ClientModel findClientModelByUsername(String username) {
+        List<ClientModel> clientModelList = Bootstrap.clientModelList.getClientModelList();
+        for (ClientModel clientModel : clientModelList) {
+            if (clientModel.getUsername().equals(username)) {
+                return clientModel;
+            }
+
+        }
+        return new ClientModel();
+
+    }
+
+
 }

@@ -1,16 +1,25 @@
 package com.jceloto7.java_bank.service;
 
 import com.jceloto7.java_bank.model.ClientModel;
-import com.jceloto7.java_bank.model.ClientModelList;
+
 import java.util.List;
 
 public class ValidationService {
-    private final ClientModelList clientModelList = new ClientModelList();
-    private final List<ClientModel> clientModelListIterator = clientModelList.getClientModelList();
+    private final List<ClientModel> clientModelList;
 
-    public boolean usernameValidation(String input){
-        boolean validation = false;
-        for(ClientModel clientModelIteration : clientModelListIterator){
+    private boolean validation;
+
+    public ValidationService(List<ClientModel> clientModelList){
+        this.clientModelList = clientModelList;
+    }
+
+
+
+
+
+    /*public boolean usernameValidation(String input){
+        validation = false;
+        for(ClientModel clientModelIteration : clientModelList){
             if (clientModelIteration.getUsername().equals(input)) {
                 validation = true;
                 break;
@@ -19,8 +28,21 @@ public class ValidationService {
         }
         return validation;
 
-    }
+    }*/
 
+    public boolean userValidation(String username, String password) {
+        validation = false;
+        for (ClientModel clientModelIteration : clientModelList) {
+            if (clientModelIteration.getUsername().equals(username) &&
+                    clientModelIteration.getPassword().equals(password)) {
+                validation = true;
+                break;
+            }
+
+        }
+        return validation;
+
+    }
 
 }
 

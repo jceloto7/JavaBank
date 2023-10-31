@@ -2,11 +2,14 @@ package com.jceloto7.java_bank.view;
 
 import com.jceloto7.java_bank.Bootstrap;
 import com.jceloto7.java_bank.controller.ClientController;
+import com.jceloto7.java_bank.controller.ClientMenuController;
+import com.jceloto7.java_bank.controller.MismatchCorrectionController;
+import com.jceloto7.java_bank.controller.ValidationController;
 import com.jceloto7.java_bank.model.ClientModel;
 import com.jceloto7.java_bank.util.InputUtil;
 import com.jceloto7.java_bank.model.ClientModelList;
-import java.util.LinkedList;
-import java.util.List;
+
+import static com.jceloto7.java_bank.Bootstrap.validationService;
 
 public class MenuView {
 
@@ -18,15 +21,14 @@ public class MenuView {
         ClientModel clientModel;
         String clientInput;
         String name;
-        String id;
+        String credentialNumbers;
         String username;
         String password;
-        boolean usernameFound;
-        ClientModelList clientModelList = new ClientModelList();
-        List<ClientModel> clientModelListIterator = clientModelList.getClientModelList();
-        //ClientModelList clientModelList = Bootstrap.clientModelList;
-        //ClientModelList clientModelList;
-        //List<ClientModel> clientModelList = new LinkedList<>();
+        ClientModelList clientModelList = Bootstrap.clientModelList;
+        ValidationController validationController = new ValidationController(validationService);
+        boolean validationSucessful;
+        MismatchCorrectionController mismatchCorrectionController = new MismatchCorrectionController(Bootstrap.mismatchCorrectionService);
+        ClientMenuController clientMenuController = new ClientMenuController(Bootstrap.clientMenuService);
 
         System.out.println("""
             Welcome to  Java Bank ^-^
@@ -51,9 +53,9 @@ public class MenuView {
                 name = clientController.getClientName(clientInput);
                 System.out.println("""
                         What a pretty name :)
-                        Now, please type your id (it contains six integer numbers.).""");
+                        Now, please type your credential numbers (it contains six integer numbers.).""");
                 clientInput = inputUtil.getInput();
-                id = clientController.getClientId(clientInput);
+                credentialNumbers = clientController.getClientId(clientInput);
                 System.out.println("""
                         All right! Now, you will need to create your username.
                         You will use it to enter in your account, so keep in mind.""");
@@ -66,7 +68,7 @@ public class MenuView {
                         Remember: The password must contain just four numbers.""");
                 clientInput = inputUtil.getInput();
                 password = clientController.getClientPassword(clientInput);
-                clientModel = clientController.getClientData(name,id, username,password);
+                clientModel = clientController.createClientModel(name,credentialNumbers, username,password);
                 clientModelList.addClient(clientModel);
                 System.out.println("""
                         All done! Welcome to our family.
@@ -75,21 +77,16 @@ public class MenuView {
             }
 
             case '2' -> {
-                System.out.println("""
-                        Please enter your username:""");
+                System.out.println("Please enter your username:");
                 username = inputUtil.getInput();
-                usernameFound =false;
-                for(ClientModel clientModelIteration : clientModelListIterator){
-                    if (clientModelIteration.getUsername().equals(username)) {
-                        usernameFound = true;
-                        break;
-                    }
-                }
-                if (usernameFound){
-                    System.out.println("test");
-                }
-                while (!usernameFound){
-                    System.out.println();
+                System.out.println("Great! Now, please, type your password");
+                password = inputUtil.getInput();
+                validationSucessful = validationController.userValidation(username,password);
+                if(!validationSucessful){
+                    mismatchCorrectionController.retypeData();
+                }else {
+                    clientModel = clientController.findClientModelByUsername(username);
+                    clientMenuController.clientMenu(clientModel);
                 }
 
             }
@@ -98,4 +95,6 @@ public class MenuView {
         }
     }
 }
+
+
 }
