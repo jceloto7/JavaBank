@@ -1,7 +1,6 @@
 package com.jceloto7.java_bank;
 
 import com.jceloto7.java_bank.model.ClientModelList;
-import com.jceloto7.java_bank.service.ClientMenuService;
 import com.jceloto7.java_bank.service.ClientService;
 import com.jceloto7.java_bank.service.MismatchCorrectionService;
 import com.jceloto7.java_bank.service.ValidationService;
@@ -27,7 +26,6 @@ public class Bootstrap {
 
     public static ClientModelList clientModelList;
 
-    public static ClientMenuService clientMenuService;
 
 
 
@@ -39,7 +37,5 @@ public class Bootstrap {
         mismatchCorrectionUtil = new MismatchCorrectionUtil(validationUtil, inputUtil);
         clientService = new ClientService(validationUtil,mismatchCorrectionUtil);
         mismatchCorrectionService = new MismatchCorrectionService(inputUtil,validationService);
-        clientMenuService = new ClientMenuService();
-
     }
 }

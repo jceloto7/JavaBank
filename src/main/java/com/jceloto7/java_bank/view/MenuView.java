@@ -2,7 +2,6 @@ package com.jceloto7.java_bank.view;
 
 import com.jceloto7.java_bank.Bootstrap;
 import com.jceloto7.java_bank.controller.ClientController;
-import com.jceloto7.java_bank.controller.ClientMenuController;
 import com.jceloto7.java_bank.controller.MismatchCorrectionController;
 import com.jceloto7.java_bank.controller.ValidationController;
 import com.jceloto7.java_bank.model.ClientModel;
@@ -14,8 +13,7 @@ import static com.jceloto7.java_bank.Bootstrap.validationService;
 public class MenuView {
 
     public void mainMenu(){
-        String input;
-        char[] option = new char[3];
+        String switchOption = "1";
         InputUtil inputUtil = Bootstrap.inputUtil;
         ClientController clientController = new ClientController(Bootstrap.clientService);
         ClientModel clientModel;
@@ -26,15 +24,16 @@ public class MenuView {
         String password;
         ClientModelList clientModelList = Bootstrap.clientModelList;
         ValidationController validationController = new ValidationController(validationService);
-        boolean validationSucessful;
+        boolean validationSuccessful;
+        boolean validationRetry;
         MismatchCorrectionController mismatchCorrectionController = new MismatchCorrectionController(Bootstrap.mismatchCorrectionService);
-        ClientMenuController clientMenuController = new ClientMenuController(Bootstrap.clientMenuService);
+        ClientMenuView clientMenuView = new ClientMenuView();
 
         System.out.println("""
             Welcome to  Java Bank ^-^
             This is the main menu. What would you like to do?
            """);
-        while (option[0] !='3'){
+        while (!switchOption.equals("3")){
 
             System.out.println("""
                 Please choose an option:
@@ -42,10 +41,9 @@ public class MenuView {
                 2- I wanna to enter in my account.
                 3- I want to go out.
                 """);
-        input = inputUtil.getInput();
-        option = input.toCharArray();
-        switch (option[0]) {
-            case '1' -> {
+        switchOption = inputUtil.getInput();
+        switch (switchOption) {
+            case "1" -> {
                 System.out.println("""
                             We are glad for you decision :)
                             First of all we need to know your name.""");
@@ -76,21 +74,26 @@ public class MenuView {
                         """);
             }
 
-            case '2' -> {
+            case "2" -> {
                 System.out.println("Please enter your username:");
                 username = inputUtil.getInput();
                 System.out.println("Great! Now, please, type your password");
                 password = inputUtil.getInput();
-                validationSucessful = validationController.userValidation(username,password);
-                if(!validationSucessful){
-                    mismatchCorrectionController.retypeData();
-                }else {
+                validationSuccessful = validationController.userValidation(username,password);
+                if(!validationSuccessful){
+                    validationRetry = mismatchCorrectionController.retypeData();
+                    if(!validationRetry){
+                        System.out.println("Your tries are over. You have been disconnected.");
+                    } else {
+                        clientModel = clientController.findClientModelByUsername(username);
+                        clientMenuView.clientMenu(clientModel);
+                    }
+                } else{
                     clientModel = clientController.findClientModelByUsername(username);
-                    clientMenuController.clientMenu(clientModel);
+                    clientMenuView.clientMenu(clientModel);
                 }
-
             }
-            case '3' -> System.out.println("Thanks for using the Java Bank :)");
+            case "3" -> System.out.println("Thanks for using the Java Bank :)");
             default -> System.out.println("Invalid option. Please try again.");
         }
     }

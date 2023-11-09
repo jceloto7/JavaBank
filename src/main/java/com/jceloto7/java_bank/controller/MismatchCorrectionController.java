@@ -10,12 +10,14 @@ public class MismatchCorrectionController {
         this.mismatchCorrectionService = mismatchCorrectionService;
     }
 
-    public void retypeData(){
+    public boolean retypeData(){
         try {
-             mismatchCorrectionService.retypeData();
+             return mismatchCorrectionService.retypeData();
         } catch (Exception ex){
             System.out.println("An unexpected error has occurred. Please try again.");
         }
+
+        return false;
 
     }
 }

@@ -13,23 +13,6 @@ public class ValidationService {
         this.clientModelList = clientModelList;
     }
 
-
-
-
-
-    /*public boolean usernameValidation(String input){
-        validation = false;
-        for(ClientModel clientModelIteration : clientModelList){
-            if (clientModelIteration.getUsername().equals(input)) {
-                validation = true;
-                break;
-            }
-
-        }
-        return validation;
-
-    }*/
-
     public boolean userValidation(String username, String password) {
         validation = false;
         for (ClientModel clientModelIteration : clientModelList) {

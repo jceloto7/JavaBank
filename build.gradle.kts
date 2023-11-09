@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "com.jceloto7"
-version = "0.10.0-SNAPSHOT"
+version = "0.11.0-SNAPSHOT"
 
 tasks.jar{
     manifest{
@@ -17,6 +17,7 @@ repositories {
 
 dependencies {
     implementation(group = "org.apache.commons",name = "commons-lang3",version = "3.12.0")
+    implementation("org.jetbrains:annotations:24.0.0")
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
 }

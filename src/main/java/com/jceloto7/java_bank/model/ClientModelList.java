@@ -14,6 +14,10 @@ public class ClientModelList {
         clientModelList.add(clientModel);
     }
 
+    public void removeClient(ClientModel clientModel){
+        clientModelList.remove(clientModel);
+    }
+
     public List<ClientModel>getClientModelList(){
         return clientModelList;
     }

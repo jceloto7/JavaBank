@@ -11,7 +11,7 @@ public class MismatchCorrectionService {
         this.validationService = validationService;
     }
 
-    public void retypeData(){
+    public boolean retypeData(){
         int tries = 2;
         boolean validationSucessful = false;
         String username;
@@ -28,6 +28,6 @@ public class MismatchCorrectionService {
             validationSucessful=validationService.userValidation(username,password);
             tries ++;
         }
-
+        return validationSucessful;
     }
 }
