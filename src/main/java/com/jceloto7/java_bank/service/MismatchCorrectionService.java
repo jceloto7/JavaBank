@@ -4,20 +4,21 @@ import com.jceloto7.java_bank.util.InputUtil;
 
 public class MismatchCorrectionService {
     private final InputUtil inputUtil;
-    private final ValidationService validationService;
+    private final AuthenticationService authenticationService;
 
-    public MismatchCorrectionService(InputUtil inputUtil, ValidationService validationService){
+    private String username;
+
+    public MismatchCorrectionService(InputUtil inputUtil, AuthenticationService authenticationService){
         this.inputUtil = inputUtil;
-        this.validationService = validationService;
+        this.authenticationService = authenticationService;
     }
 
     public boolean retypeData(){
         int tries = 2;
-        boolean validationSucessful = false;
-        String username;
+        boolean validationSuccessful = false;
         String password;
 
-        while(!validationSucessful && tries <4){
+        while(!validationSuccessful && tries <4){
             System.out.println("""
                             The username or the password are incorrect. Please try again or create your account.
                             WARNING: For security reasons you will be disconnected if the errors persist.
@@ -25,9 +26,13 @@ public class MismatchCorrectionService {
             username = inputUtil.getInput();
             System.out.println("Now, type your password:");
             password = inputUtil.getInput();
-            validationSucessful=validationService.userValidation(username,password);
+            validationSuccessful= authenticationService.userValidation(username,password);
             tries ++;
         }
-        return validationSucessful;
+        return validationSuccessful;
+    }
+
+    public String getUsername(){
+        return username;
     }
 }

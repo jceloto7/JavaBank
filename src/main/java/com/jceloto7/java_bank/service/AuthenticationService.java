@@ -4,16 +4,16 @@ import com.jceloto7.java_bank.model.ClientModel;
 
 import java.util.List;
 
-public class ValidationService {
+public class AuthenticationService {
     private final List<ClientModel> clientModelList;
 
-    private boolean validation;
-
-    public ValidationService(List<ClientModel> clientModelList){
+    public AuthenticationService(List<ClientModel> clientModelList) {
         this.clientModelList = clientModelList;
     }
 
     public boolean userValidation(String username, String password) {
+        boolean validation;
+
         validation = false;
         for (ClientModel clientModelIteration : clientModelList) {
             if (clientModelIteration.getUsername().equals(username) &&
@@ -28,5 +28,3 @@ public class ValidationService {
     }
 
 }
-
-

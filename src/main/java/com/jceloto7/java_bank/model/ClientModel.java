@@ -1,10 +1,10 @@
 package com.jceloto7.java_bank.model;
 
 public class ClientModel {
-    private String name;
-    private String credentialNumbers;
-    private String username;
-    private String password;
+    private final String name;
+    private final String credentialNumbers;
+    private final String username;
+    private final String password;
 
 
     public ClientModel(){
@@ -23,24 +23,13 @@ public class ClientModel {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getCredentialNumbers() {
         return credentialNumbers;
     }
 
-    public void setCredentialNumbers(String credentialNumbers) {
-        this.credentialNumbers = credentialNumbers;
-    }
 
     public String getUsername() {
         return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
 
@@ -48,24 +37,21 @@ public class ClientModel {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+
     public String getPersonalData(){
         String name;
         String credentialNumbers;
         String personalData;
-        //double initialBalance = 0;
 
         name = getName();
         credentialNumbers = getCredentialNumbers();
 
         personalData = """
-               Your personal data: 
+               Your personal data:
                
-               Name: """ + name + "\n" +
+               Name:""" + name + "\n" +
                "Credential Numbers: " + credentialNumbers;
-            //   "Initial Balance: " + initialBalance;
+
         return personalData;
 
     }

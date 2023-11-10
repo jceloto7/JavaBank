@@ -3,7 +3,6 @@ package com.jceloto7.java_bank.util;
 public class MismatchCorrectionUtil {
     private  final ValidationUtil validationUtil;
     private final InputUtil inputUtil;
-    private String input;
     public MismatchCorrectionUtil(ValidationUtil validationUtil, InputUtil inputUtil){
         this.validationUtil = validationUtil;
         this.inputUtil = inputUtil;
@@ -49,6 +48,17 @@ public class MismatchCorrectionUtil {
         }
 
         return input;
+    }
+
+    public String retypeDecimalNumbers(boolean validation, String input){
+        while(!validation){
+            System.out.println("Invalid input. Please just type integer or decimal numbers.");
+            input = inputUtil.getInput();
+            validation = validationUtil.validationDecimalNumbers(input);
+        }
+
+        return input;
+
     }
 
 }

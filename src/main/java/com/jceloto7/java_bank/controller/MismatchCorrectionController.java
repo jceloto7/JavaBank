@@ -6,18 +6,29 @@ public class MismatchCorrectionController {
 
     private final MismatchCorrectionService mismatchCorrectionService;
 
-    public MismatchCorrectionController(MismatchCorrectionService mismatchCorrectionService){
+    public MismatchCorrectionController(MismatchCorrectionService mismatchCorrectionService) {
         this.mismatchCorrectionService = mismatchCorrectionService;
     }
 
-    public boolean retypeData(){
+    public boolean retypeData() {
         try {
-             return mismatchCorrectionService.retypeData();
-        } catch (Exception ex){
+            return mismatchCorrectionService.retypeData();
+        } catch (Exception ex) {
             System.out.println("An unexpected error has occurred. Please try again.");
         }
 
         return false;
 
     }
+
+    public String getUsername() {
+        try {
+            return mismatchCorrectionService.getUsername();
+        } catch (Exception ex) {
+            System.out.println("An unexpected error has occurred. Please try again.");
+        }
+
+        return "";
+    }
+
 }

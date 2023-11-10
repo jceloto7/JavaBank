@@ -68,6 +68,15 @@ public class ClientController {
         return new ClientModel();
     }
 
+    public double getDecimalNumber(String input){
+        try{
+            return clientService.getDecimalNumber(input);
+        }catch (Exception ex){
+            System.out.println("An unexpected error has occurred. Please try again.");
+        }
+        return 0;
+    }
+
 
 }
 

@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "com.jceloto7"
-version = "0.11.0-SNAPSHOT"
+version = "1.0.0-SNAPSHOT"
 
 tasks.jar{
     manifest{

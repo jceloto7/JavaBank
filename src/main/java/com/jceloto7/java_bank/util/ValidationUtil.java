@@ -46,7 +46,13 @@ public class ValidationUtil {
 
     }
 
+    public boolean validationDecimalNumbers(String input){
+        pattern = Pattern.compile("^[0-9]+([.,][0-9]+)?$");
+        matcher = pattern.matcher(input);
+        validation = matcher.find();
 
+        return validation;
+    }
 
 
 

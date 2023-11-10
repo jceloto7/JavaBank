@@ -3,7 +3,7 @@ package com.jceloto7.java_bank;
 import com.jceloto7.java_bank.model.ClientModelList;
 import com.jceloto7.java_bank.service.ClientService;
 import com.jceloto7.java_bank.service.MismatchCorrectionService;
-import com.jceloto7.java_bank.service.ValidationService;
+import com.jceloto7.java_bank.service.AuthenticationService;
 import com.jceloto7.java_bank.util.InputUtil;
 import com.jceloto7.java_bank.util.MismatchCorrectionUtil;
 import com.jceloto7.java_bank.util.ValidationUtil;
@@ -20,7 +20,7 @@ public class Bootstrap {
 
     public static ClientService clientService;
 
-    public static ValidationService validationService;
+    public static AuthenticationService authenticationService;
 
     public static MismatchCorrectionService mismatchCorrectionService;
 
@@ -33,9 +33,9 @@ public class Bootstrap {
         inputUtil = new InputUtil();
         validationUtil = new ValidationUtil();
         clientModelList = new ClientModelList();
-        validationService = new ValidationService(clientModelList.getClientModelList());
+        authenticationService = new AuthenticationService(clientModelList.getClientModelList());
         mismatchCorrectionUtil = new MismatchCorrectionUtil(validationUtil, inputUtil);
         clientService = new ClientService(validationUtil,mismatchCorrectionUtil);
-        mismatchCorrectionService = new MismatchCorrectionService(inputUtil,validationService);
+        mismatchCorrectionService = new MismatchCorrectionService(inputUtil, authenticationService);
     }
 }

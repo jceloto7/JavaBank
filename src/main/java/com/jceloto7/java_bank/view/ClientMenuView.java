@@ -1,6 +1,7 @@
 package com.jceloto7.java_bank.view;
 
 import com.jceloto7.java_bank.Bootstrap;
+import com.jceloto7.java_bank.controller.ClientController;
 import com.jceloto7.java_bank.model.ClientModel;
 import com.jceloto7.java_bank.model.ClientModelList;
 import com.jceloto7.java_bank.util.InputUtil;
@@ -17,6 +18,7 @@ public class ClientMenuView {
         double balance =0;
         double deposit;
         double withdraw;
+        ClientController clientController = new ClientController(Bootstrap.clientService);
 
         while (!switchOption.equals("6")){
             System.out.println("Hello " + name + "!" + "\n" +"""
@@ -28,38 +30,42 @@ public class ClientMenuView {
                    2- I need to withdraw money.
                    3- I want to see my personal data.
                    4- I'm gonna make a deposit.
-                   5- I want to erase my account.
                    6- Return to main menu.
                    """);
             switchOption = inputUtil.getInput();
 
             switch (switchOption){
-                case "1" -> System.out.println("Your balance is %.2f" + balance);
+                case "1" -> {
+                    String formatted;
+
+                    formatted = String.format("%.2f",balance);
+                    System.out.println("Your balance is " + formatted + "\n");
+                }
 
                 case "2" ->{
                     System.out.println("How much money do you want to withdraw?");
                     input = inputUtil.getInput();
-                    withdraw = Double.parseDouble(input);
+                    withdraw = clientController.getDecimalNumber(input);
                     if (balance < withdraw){
-                        System.out.println("Insufficient funds. Please see your balance.");
+                        System.out.println("Insufficient funds. Please see your balance.\n");
                     } else{
                         balance = balance - withdraw;
-                        System.out.println("Withdrawal successful. You're not getting the dirty name, are you?");
+                        System.out.println("Withdrawal successful. You're not getting the dirty name, are you?\n");
                     }
                 }
 
                 case "3" ->{
-                    System.out.println("No problem!");
+                    System.out.println("No problem!\n");
                     personalData = clientModel.getPersonalData();
-                    System.out.println(personalData);
+                    System.out.println(personalData + "\n");
                 }
 
                 case "4" ->{
                     System.out.println("How much money do you want do deposit?");
                     input = inputUtil.getInput();
-                    deposit = Double.parseDouble(input);
+                    deposit = clientController.getDecimalNumber(input);
                     balance = balance + deposit;
-                    System.out.println( "Deposit made successfully. You are getting rich!");
+                    System.out.println( "Deposit made successfully. You are getting rich!\n");
                 }
 
                 case "5" ->{

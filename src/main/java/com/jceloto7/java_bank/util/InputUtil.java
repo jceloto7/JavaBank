@@ -11,7 +11,7 @@ public class InputUtil {
     public String getInput() {
         String input;
         input = scanner.nextLine();
-        return input;
+        return input.replace(',','.');
     }
     public void closeScanner(){
         scanner.close();

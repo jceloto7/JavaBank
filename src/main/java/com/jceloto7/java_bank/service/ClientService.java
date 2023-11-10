@@ -79,5 +79,16 @@ public class ClientService {
 
     }
 
+    public double getDecimalNumber(String input){
+        double balance ;
+        String toConvert;
+
+        validation = validationUtil.validationDecimalNumbers(input);
+        toConvert = mismatchCorrectionUtil.retypeDecimalNumbers(validation, input);
+        balance = Double.parseDouble(toConvert);
+
+        return balance;
+
+    }
 
 }

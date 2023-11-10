@@ -3,12 +3,12 @@ package com.jceloto7.java_bank.view;
 import com.jceloto7.java_bank.Bootstrap;
 import com.jceloto7.java_bank.controller.ClientController;
 import com.jceloto7.java_bank.controller.MismatchCorrectionController;
-import com.jceloto7.java_bank.controller.ValidationController;
+import com.jceloto7.java_bank.controller.AuthenticationController;
 import com.jceloto7.java_bank.model.ClientModel;
 import com.jceloto7.java_bank.util.InputUtil;
 import com.jceloto7.java_bank.model.ClientModelList;
 
-import static com.jceloto7.java_bank.Bootstrap.validationService;
+import static com.jceloto7.java_bank.Bootstrap.authenticationService;
 
 public class MenuView {
 
@@ -23,7 +23,7 @@ public class MenuView {
         String username;
         String password;
         ClientModelList clientModelList = Bootstrap.clientModelList;
-        ValidationController validationController = new ValidationController(validationService);
+        AuthenticationController authenticationController = new AuthenticationController(authenticationService);
         boolean validationSuccessful;
         boolean validationRetry;
         MismatchCorrectionController mismatchCorrectionController = new MismatchCorrectionController(Bootstrap.mismatchCorrectionService);
@@ -79,12 +79,13 @@ public class MenuView {
                 username = inputUtil.getInput();
                 System.out.println("Great! Now, please, type your password");
                 password = inputUtil.getInput();
-                validationSuccessful = validationController.userValidation(username,password);
+                validationSuccessful = authenticationController.userValidation(username,password);
                 if(!validationSuccessful){
                     validationRetry = mismatchCorrectionController.retypeData();
                     if(!validationRetry){
                         System.out.println("Your tries are over. You have been disconnected.");
                     } else {
+                        username= mismatchCorrectionController.getUsername();
                         clientModel = clientController.findClientModelByUsername(username);
                         clientMenuView.clientMenu(clientModel);
                     }
@@ -93,11 +94,14 @@ public class MenuView {
                     clientMenuView.clientMenu(clientModel);
                 }
             }
-            case "3" -> System.out.println("Thanks for using the Java Bank :)");
-            default -> System.out.println("Invalid option. Please try again.");
+            case "3" -> {
+                inputUtil.closeScanner();
+                System.out.println("Thanks for using the Java Bank :)");
+            }
+                default -> System.out.println("Invalid option. Please try again.");
         }
     }
-}
 
+}
 
 }
